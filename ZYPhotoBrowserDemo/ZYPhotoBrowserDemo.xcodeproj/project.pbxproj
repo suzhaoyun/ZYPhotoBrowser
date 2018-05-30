@@ -1,0 +1,411 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		58713C4F20BD5D0C0061FDB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58713C4E20BD5D0C0061FDB3 /* AppDelegate.m */; };
+		58713C5220BD5D0C0061FDB3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58713C5120BD5D0C0061FDB3 /* ViewController.m */; };
+		58713C5520BD5D0C0061FDB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58713C5320BD5D0C0061FDB3 /* Main.storyboard */; };
+		58713C5720BD5D0D0061FDB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58713C5620BD5D0D0061FDB3 /* Assets.xcassets */; };
+		58713C5A20BD5D0D0061FDB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58713C5820BD5D0D0061FDB3 /* LaunchScreen.storyboard */; };
+		58713C5D20BD5D0D0061FDB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58713C5C20BD5D0D0061FDB3 /* main.m */; };
+		58713C6520BD659D0061FDB3 /* ZYPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 58713C6420BD659D0061FDB3 /* ZYPhotoBrowser.m */; };
+		58C6940120BE3D3500CB9215 /* ZYPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C6940020BE3D3500CB9215 /* ZYPhotoCell.m */; };
+		58C6940420BE59C400CB9215 /* ZYPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C6940320BE59C400CB9215 /* ZYPhoto.m */; };
+		B5B1FE85F8FBE9A17C431043 /* libPods-ZYPhotoBrowserDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1575DE52726BF45F9AEF9072 /* libPods-ZYPhotoBrowserDemo.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1575DE52726BF45F9AEF9072 /* libPods-ZYPhotoBrowserDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZYPhotoBrowserDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		26AA3151FD582BB15821DAF2 /* Pods-ZYPhotoBrowserDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYPhotoBrowserDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZYPhotoBrowserDemo/Pods-ZYPhotoBrowserDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		3ADF22B851735FB195764AE5 /* Pods-ZYPhotoBrowserDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYPhotoBrowserDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZYPhotoBrowserDemo/Pods-ZYPhotoBrowserDemo.release.xcconfig"; sourceTree = "<group>"; };
+		58713C4A20BD5D0C0061FDB3 /* ZYPhotoBrowserDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZYPhotoBrowserDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		58713C4D20BD5D0C0061FDB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		58713C4E20BD5D0C0061FDB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		58713C5020BD5D0C0061FDB3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		58713C5120BD5D0C0061FDB3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		58713C5420BD5D0C0061FDB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		58713C5620BD5D0D0061FDB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		58713C5920BD5D0D0061FDB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		58713C5B20BD5D0D0061FDB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		58713C5C20BD5D0D0061FDB3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		58713C6320BD659D0061FDB3 /* ZYPhotoBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZYPhotoBrowser.h; sourceTree = "<group>"; };
+		58713C6420BD659D0061FDB3 /* ZYPhotoBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYPhotoBrowser.m; sourceTree = "<group>"; };
+		58C693FF20BE3D3500CB9215 /* ZYPhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZYPhotoCell.h; sourceTree = "<group>"; };
+		58C6940020BE3D3500CB9215 /* ZYPhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYPhotoCell.m; sourceTree = "<group>"; };
+		58C6940220BE59C400CB9215 /* ZYPhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZYPhoto.h; sourceTree = "<group>"; };
+		58C6940320BE59C400CB9215 /* ZYPhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYPhoto.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		58713C4720BD5D0C0061FDB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5B1FE85F8FBE9A17C431043 /* libPods-ZYPhotoBrowserDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3BA1841D2A8BB9A1F7068C8E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				26AA3151FD582BB15821DAF2 /* Pods-ZYPhotoBrowserDemo.debug.xcconfig */,
+				3ADF22B851735FB195764AE5 /* Pods-ZYPhotoBrowserDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		58713C4120BD5D0C0061FDB3 = {
+			isa = PBXGroup;
+			children = (
+				58713C4C20BD5D0C0061FDB3 /* ZYPhotoBrowserDemo */,
+				58713C4B20BD5D0C0061FDB3 /* Products */,
+				3BA1841D2A8BB9A1F7068C8E /* Pods */,
+				70CFC07C4756B7BDBA27524D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		58713C4B20BD5D0C0061FDB3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				58713C4A20BD5D0C0061FDB3 /* ZYPhotoBrowserDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		58713C4C20BD5D0C0061FDB3 /* ZYPhotoBrowserDemo */ = {
+			isa = PBXGroup;
+			children = (
+				58713C4D20BD5D0C0061FDB3 /* AppDelegate.h */,
+				58713C4E20BD5D0C0061FDB3 /* AppDelegate.m */,
+				58713C5020BD5D0C0061FDB3 /* ViewController.h */,
+				58713C5120BD5D0C0061FDB3 /* ViewController.m */,
+				58713C5320BD5D0C0061FDB3 /* Main.storyboard */,
+				58713C5620BD5D0D0061FDB3 /* Assets.xcassets */,
+				58713C5820BD5D0D0061FDB3 /* LaunchScreen.storyboard */,
+				58713C5B20BD5D0D0061FDB3 /* Info.plist */,
+				58713C5C20BD5D0D0061FDB3 /* main.m */,
+				58713C6320BD659D0061FDB3 /* ZYPhotoBrowser.h */,
+				58713C6420BD659D0061FDB3 /* ZYPhotoBrowser.m */,
+				58C693FF20BE3D3500CB9215 /* ZYPhotoCell.h */,
+				58C6940020BE3D3500CB9215 /* ZYPhotoCell.m */,
+				58C6940220BE59C400CB9215 /* ZYPhoto.h */,
+				58C6940320BE59C400CB9215 /* ZYPhoto.m */,
+			);
+			path = ZYPhotoBrowserDemo;
+			sourceTree = "<group>";
+		};
+		70CFC07C4756B7BDBA27524D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1575DE52726BF45F9AEF9072 /* libPods-ZYPhotoBrowserDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		58713C4920BD5D0C0061FDB3 /* ZYPhotoBrowserDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58713C6020BD5D0D0061FDB3 /* Build configuration list for PBXNativeTarget "ZYPhotoBrowserDemo" */;
+			buildPhases = (
+				126FF0CA8BBE1506818C83C6 /* [CP] Check Pods Manifest.lock */,
+				58713C4620BD5D0C0061FDB3 /* Sources */,
+				58713C4720BD5D0C0061FDB3 /* Frameworks */,
+				58713C4820BD5D0C0061FDB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZYPhotoBrowserDemo;
+			productName = ZYPhotoBrowserDemo;
+			productReference = 58713C4A20BD5D0C0061FDB3 /* ZYPhotoBrowserDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		58713C4220BD5D0C0061FDB3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = ZYSu;
+				TargetAttributes = {
+					58713C4920BD5D0C0061FDB3 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+				};
+			};
+			buildConfigurationList = 58713C4520BD5D0C0061FDB3 /* Build configuration list for PBXProject "ZYPhotoBrowserDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 58713C4120BD5D0C0061FDB3;
+			productRefGroup = 58713C4B20BD5D0C0061FDB3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				58713C4920BD5D0C0061FDB3 /* ZYPhotoBrowserDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		58713C4820BD5D0C0061FDB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58713C5A20BD5D0D0061FDB3 /* LaunchScreen.storyboard in Resources */,
+				58713C5720BD5D0D0061FDB3 /* Assets.xcassets in Resources */,
+				58713C5520BD5D0C0061FDB3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		126FF0CA8BBE1506818C83C6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZYPhotoBrowserDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		58713C4620BD5D0C0061FDB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58713C6520BD659D0061FDB3 /* ZYPhotoBrowser.m in Sources */,
+				58713C5220BD5D0C0061FDB3 /* ViewController.m in Sources */,
+				58C6940120BE3D3500CB9215 /* ZYPhotoCell.m in Sources */,
+				58C6940420BE59C400CB9215 /* ZYPhoto.m in Sources */,
+				58713C5D20BD5D0D0061FDB3 /* main.m in Sources */,
+				58713C4F20BD5D0C0061FDB3 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		58713C5320BD5D0C0061FDB3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				58713C5420BD5D0C0061FDB3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		58713C5820BD5D0D0061FDB3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				58713C5920BD5D0D0061FDB3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		58713C5E20BD5D0D0061FDB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		58713C5F20BD5D0D0061FDB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		58713C6120BD5D0D0061FDB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 26AA3151FD582BB15821DAF2 /* Pods-ZYPhotoBrowserDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = J89744QE5F;
+				INFOPLIST_FILE = ZYPhotoBrowserDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = yubang.ZYPhotoBrowserDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "588ac4f6-df11-4d96-ba4c-c3a327f7bfe1";
+				PROVISIONING_PROFILE_SPECIFIER = develop_all_0330;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		58713C6220BD5D0D0061FDB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3ADF22B851735FB195764AE5 /* Pods-ZYPhotoBrowserDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = ZYPhotoBrowserDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = yubang.ZYPhotoBrowserDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		58713C4520BD5D0C0061FDB3 /* Build configuration list for PBXProject "ZYPhotoBrowserDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58713C5E20BD5D0D0061FDB3 /* Debug */,
+				58713C5F20BD5D0D0061FDB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58713C6020BD5D0D0061FDB3 /* Build configuration list for PBXNativeTarget "ZYPhotoBrowserDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58713C6120BD5D0D0061FDB3 /* Debug */,
+				58713C6220BD5D0D0061FDB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 58713C4220BD5D0C0061FDB3 /* Project object */;
+}
