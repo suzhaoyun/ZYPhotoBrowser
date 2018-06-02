@@ -15,7 +15,6 @@
 		58713C5D20BD5D0D0061FDB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58713C5C20BD5D0D0061FDB3 /* main.m */; };
 		58713C6520BD659D0061FDB3 /* ZYPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 58713C6420BD659D0061FDB3 /* ZYPhotoBrowser.m */; };
 		58C6940120BE3D3500CB9215 /* ZYPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C6940020BE3D3500CB9215 /* ZYPhotoCell.m */; };
-		58C6940420BE59C400CB9215 /* ZYPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C6940320BE59C400CB9215 /* ZYPhoto.m */; };
 		B5B1FE85F8FBE9A17C431043 /* libPods-ZYPhotoBrowserDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1575DE52726BF45F9AEF9072 /* libPods-ZYPhotoBrowserDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -37,8 +36,6 @@
 		58713C6420BD659D0061FDB3 /* ZYPhotoBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYPhotoBrowser.m; sourceTree = "<group>"; };
 		58C693FF20BE3D3500CB9215 /* ZYPhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZYPhotoCell.h; sourceTree = "<group>"; };
 		58C6940020BE3D3500CB9215 /* ZYPhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYPhotoCell.m; sourceTree = "<group>"; };
-		58C6940220BE59C400CB9215 /* ZYPhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZYPhoto.h; sourceTree = "<group>"; };
-		58C6940320BE59C400CB9215 /* ZYPhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYPhoto.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,8 +93,6 @@
 				58713C6420BD659D0061FDB3 /* ZYPhotoBrowser.m */,
 				58C693FF20BE3D3500CB9215 /* ZYPhotoCell.h */,
 				58C6940020BE3D3500CB9215 /* ZYPhotoCell.m */,
-				58C6940220BE59C400CB9215 /* ZYPhoto.h */,
-				58C6940320BE59C400CB9215 /* ZYPhoto.m */,
 			);
 			path = ZYPhotoBrowserDemo;
 			sourceTree = "<group>";
@@ -205,7 +200,6 @@
 				58713C6520BD659D0061FDB3 /* ZYPhotoBrowser.m in Sources */,
 				58713C5220BD5D0C0061FDB3 /* ViewController.m in Sources */,
 				58C6940120BE3D3500CB9215 /* ZYPhotoCell.m in Sources */,
-				58C6940420BE59C400CB9215 /* ZYPhoto.m in Sources */,
 				58713C5D20BD5D0D0061FDB3 /* main.m in Sources */,
 				58713C4F20BD5D0C0061FDB3 /* AppDelegate.m in Sources */,
 			);

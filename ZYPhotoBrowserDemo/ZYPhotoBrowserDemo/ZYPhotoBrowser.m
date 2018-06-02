@@ -8,16 +8,19 @@
 
 #import "ZYPhotoBrowser.h"
 #import "ZYPhotoCell.h"
+#import <SDWebImageManager.h>
 
 @interface ZYPhotoBrowser ()
-<UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate>
+<UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (nonatomic, strong) UIImageView *bgImageView;
+@property (nonatomic, strong) UIImageView *bgView;
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, assign) BOOL sourceNavigationBarHidden;
 @property (nonatomic, assign) BOOL sourceStatusBarHidden;
-@property (nonatomic, strong) UIPanGestureRecognizer *panGes;
+@property (nonatomic, assign) NSInteger currentIndex;
+@property (nonatomic, strong) UIImage *bgImage;
+@property (nonatomic, strong) UIPageControl *pageControl;
 @end
 
 static NSString *CellID = @"ZYPhotoBrowserCellID";
@@ -33,39 +36,111 @@ static NSString *CellID = @"ZYPhotoBrowserCellID";
     }
     self.sourceStatusBarHidden = [UIApplication sharedApplication].statusBarHidden;
     
-    [self.view addSubview:self.bgImageView];
-    self.contentView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarChange) name:UIApplicationWillChangeStatusBarOrientationNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange) name:UIDeviceOrientationDidChangeNotification object:nil];
+
+    [self.view addSubview:self.bgView];
+    self.bgView.image = self.bgImage;
+    self.contentView = [[UIView alloc] initWithFrame:self.view.bounds];
     self.contentView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.contentView];
     [self.contentView addSubview:self.collectionView];
     
+    NSInteger count = [self.delegate numberOfPhotosInPhotoBrowser:self];
+    if (count > 1 && count < 10){
+        [self.view addSubview:self.pageControl];
+        self.pageControl.numberOfPages = count;
+        [self.pageControl setFrame:CGRectMake(0, self.view.bounds.size.height - 30, self.view.bounds.size.width, 20)];
+    }
+    
     // 切换到选中的index
     if (self.selectedIndex) {
+        self.currentIndex = self.selectedIndex;
+        self.pageControl.currentPage = self.selectedIndex;
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     }
+    
 }
 
-- (void)setScreenShot
+- (void)orientationChange
 {
-    UIGraphicsBeginImageContextWithOptions([UIScreen mainScreen].bounds.size, NO, [UIScreen mainScreen].scale);
-    [[UIColor blackColor] setFill];
-    [[UIApplication sharedApplication].keyWindow.layer renderInContext:UIGraphicsGetCurrentContext()];
-    self.bgImageView.image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    NSLog(@"orientationChange---%ld", [UIDevice currentDevice].orientation);
+}
+
+- (void)statusBarChange
+{
+    NSLog(@"statusBarChange---%ld", [UIApplication sharedApplication].statusBarOrientation);
+}
+
+- (void)startShowAnimation
+{
+    UIImage *image = [self.delegate photoBrowser:self placeholderImageForIndex:self.selectedIndex];
+    
+    NSAssert(image != nil, @"ZYPhotoBrowser必须设置占位图！！！");
+    
+    self.collectionView.hidden = YES;
+
+    UIImageView *sourceView = [self.delegate photoBrowser:self sourceViewForIndex:self.selectedIndex];
+    NSAssert([sourceView isKindOfClass:[UIImageView class]] == YES, @"sourceView必须是UIImageView类型");
+    UIImageView *animationView = [[UIImageView alloc] init];
+    animationView.contentMode = sourceView.contentMode;
+    animationView.layer.masksToBounds = sourceView.layer.masksToBounds;
+    animationView.clipsToBounds = sourceView.clipsToBounds;
+    if (sourceView == nil) {
+        animationView.frame = CGRectMake(self.view.bounds.size.width*0.5-150, self.view.bounds.size.height*0.5-150, 300, 300);
+        animationView.backgroundColor = [UIColor whiteColor];
+    }else{
+        animationView.frame = [sourceView convertRect:sourceView.bounds toView:self.view];
+    }
+    
+    NSURL *imageURL = [self.delegate photoBrowser:self imageURLForIndex:self.selectedIndex];
+    if ([imageURL isFileURL]) {
+        animationView.image = [[UIImage alloc] initWithContentsOfFile:imageURL.path];
+    }else{
+        UIImage *originImage = [[SDImageCache sharedImageCache] imageFromCacheForKey:imageURL.absoluteString];
+        animationView.image = originImage?originImage:image;
+    }
+    [self.view addSubview:animationView];
+    
+    CGRect destFrame = [self adjustFrameWithImage:animationView.image];
+    [UIView animateWithDuration:0.3 animations:^{
+        animationView.frame = destFrame;
+    }completion:^(BOOL finished) {
+        [animationView removeFromSuperview];
+        self.collectionView.hidden = NO;
+    }];
+}
+
+- (CGRect)adjustFrameWithImage:(UIImage *)image
+{
+    CGFloat imageW = image.size.width;
+    CGFloat imageH = image.size.height;
+    CGFloat width = self.view.bounds.size.width;
+    CGFloat height = width / imageW * imageH;
+    
+    if (height > self.view.bounds.size.height) {
+        return CGRectMake(0, 0, width, height);
+    }else{
+        return CGRectMake((self.view.bounds.size.width-width)*0.5, (self.view.bounds.size.height-height)*0.5, width, height);
+    }
 }
 
 - (void)showWithViewController:(UIViewController *)viewController
 {
-    [self setScreenShot];
+    UIGraphicsBeginImageContextWithOptions(viewController.view.bounds.size, YES, [UIScreen mainScreen].scale);
+    [viewController.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    self.bgImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
-    [viewController presentViewController:self animated:NO completion:nil];
-}
-
-- (void)showWithNavigationController:(UINavigationController *)navigationController
-{
-    [self setScreenShot];
-    
-    [navigationController pushViewController:self animated:YES];
+    if (self.animationType == ZYAnimationTypeScale) {
+        [viewController presentViewController:self animated:NO completion:^{
+            [self startShowAnimation];
+        }];
+    }
+    else if (self.animationType == ZYAnimationTypePush){
+        NSAssert(viewController.navigationController != nil, @"ZYPhotoBrowser的animationType设置为ZYAnimationTypePush时，viewController必须有navigationCotnroller才可以");
+        [viewController.navigationController pushViewController:self animated:YES];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -93,145 +168,80 @@ static NSString *CellID = @"ZYPhotoBrowserCellID";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ZYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellID forIndexPath:indexPath];
-    if (self.delegate) {
-        cell.placeHolderImage = [self.delegate photoBrowser:self placeHolderImageForIndex:indexPath.item];
-        cell.imageURL = [self.delegate photoBrowser:self imageURLForIndex:indexPath.item];
-    }else{
-        id<ZYPhotoProtocol> model = [self.photos objectAtIndex:indexPath.item];
-        cell.placeHolderImage = model.placeHolderImage;
-        cell.imageURL = model.imageURL;
+    cell.index = indexPath.item;
+    cell.browser = self;
+    cell.imageURL = [self.delegate photoBrowser:self imageURLForIndex:indexPath.item];
+    cell.placeHolderImage = [self.delegate photoBrowser:self placeholderImageForIndex:indexPath.item];
+    if ([self.delegate respondsToSelector:@selector(photoBrowser:sourceViewForIndex:)]) {
+        UIImageView *sourceView = [self.delegate photoBrowser:self sourceViewForIndex:indexPath.item];
+        NSAssert([sourceView isKindOfClass:[UIImageView class]] == YES, @"sourceView必须是UIImageView类型");
+        cell.sourceView = sourceView;
     }
     return cell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (self.delegate) {
-        return [self.delegate numberOfPhotosInPhotoBrowser:self];
-    }
-    return self.photos.count;
+    return [self.delegate numberOfPhotosInPhotoBrowser:self];
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    return NO;
+    self.currentIndex = scrollView.contentOffset.x / scrollView.bounds.size.width;
+    _pageControl.currentPage = self.currentIndex;
 }
 
-- (void)panGes:(UIPanGestureRecognizer *)panGes
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (panGes.state) {
-        case UIGestureRecognizerStateBegan:
-        case UIGestureRecognizerStateChanged:
-        {
-            CGPoint point = [panGes translationInView:panGes.view];
-            if (self.collectionView.center.y <= self.view.bounds.size.height * 0.5 && point.y < 0) {
-                break;
-            }
-            
-            NSLog(@"xxxxx---%@", NSStringFromCGPoint(point));
-            
-            if (panGes.state == UIGestureRecognizerStateBegan) {
-                [[UIApplication sharedApplication] setStatusBarHidden:self.sourceStatusBarHidden];
-                [self setNeedsStatusBarAppearanceUpdate];
-            }
-            CGFloat y = self.collectionView.center.y + point.y * 0.5;
-            CGFloat x = self.collectionView.center.x + point.x * 0.5;
-            
-            // 边界检测
-            if (y > self.view.bounds.size.height) {
-                y = self.view.bounds.size.height;
-            }
-            
-            if (x < 0) {
-                x = 0;
-            }
-            
-            if (x > self.view.bounds.size.width) {
-                x = self.view.bounds.size.width;
-            }
-            self.collectionView.center = CGPointMake(x, y);
-            
-            /**
-             缩放系数
-             1. 从观察可以得知，imageView的中点y值距离底部越近控件就越小
-             2. imageView控件需要有最小值限制 不能无限缩小
-             推算公式：
-             center.y = height * 0.5 时 scale为1
-             center.y = height时 scale为0.2
-             */
-            
-            CGFloat scale = (self.view.bounds.size.height-self.collectionView.center.y)/(self.view.bounds.size.height*0.5)*0.7+0.3;
-            self.contentView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:scale];
-            self.collectionView.transform = CGAffineTransformMakeScale(scale, scale);
-            break;
-        }
-        case UIGestureRecognizerStateEnded:
-        case UIGestureRecognizerStateCancelled:
-        {
-            [[UIApplication sharedApplication] setStatusBarHidden:YES];
-            [self setNeedsStatusBarAppearanceUpdate];
-            
-            // 处理松手判断
-            [UIView animateWithDuration:0.25 animations:^{
-                self.collectionView.center = CGPointMake(self.view.bounds.size.width * 0.5, self.view.bounds.size.height * 0.5);
-                self.collectionView.transform = CGAffineTransformIdentity;
-                self.contentView.backgroundColor = [UIColor blackColor];
-            }];
-            break;
-        }
-        default:
-            break;
-    }
-    [panGes setTranslation:CGPointZero inView:panGes.view];
+    return CGSizeMake(collectionView.bounds.size.width, collectionView.bounds.size.height);
 }
 
 #pragma mark - 懒加载
 - (UICollectionView *)collectionView
 {
     if (_collectionView == nil) {
-        // 不支持横屏
-        CGRect bounds = [UIScreen mainScreen].bounds;
-        CGFloat width = MIN(bounds.size.width, bounds.size.height);
-        CGFloat height = MAX(bounds.size.width, bounds.size.height);
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        layout.itemSize = CGSizeMake(width + 20, height);
         layout.minimumLineSpacing = 0;
         layout.minimumInteritemSpacing = 0;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(-10, 0, width + 20, height) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(-10, 0, self.view.bounds.size.width + 20, self.view.bounds.size.height) collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.pagingEnabled = YES;
-        if (self.customCell) {
-            NSAssert( [self.customCell isSubclassOfClass:[ZYPhotoCell class]], @"自定义cell必须继承ZYPhotoCell");
-            [_collectionView registerClass:self.customCell forCellWithReuseIdentifier:CellID];
+        
+        if (self.cellClass) {
+            NSAssert([self.cellClass isSubclassOfClass:[ZYPhotoCell class]], @"自定义cell必须继承ZYPhotoCell");
+            [_collectionView registerClass:self.cellClass forCellWithReuseIdentifier:CellID];
         }else{
             [_collectionView registerClass:[ZYPhotoCell class] forCellWithReuseIdentifier:CellID];
         }
-        
-        UIPanGestureRecognizer *panGes = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGes:)];
-        panGes.delegate = self;
-        [self.contentView addGestureRecognizer:panGes];
-        self.panGes = panGes;
     }
     return _collectionView;
 }
 
-- (UIImageView *)bgImageView
+- (UIImageView *)bgView
 {
-    if (_bgImageView == nil) {
-        _bgImageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    if (_bgView == nil) {
+        _bgView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     }
-    return _bgImageView;
+    return _bgView;
 }
 
 - (BOOL)prefersStatusBarHidden
 {
-    if (self.panGes.state == UIGestureRecognizerStateBegan || self.panGes.state == UIGestureRecognizerStateChanged) {
-        return self.sourceStatusBarHidden;
-    }
     return YES;
+}
+
+- (UIPageControl *)pageControl
+{
+    if (_pageControl == nil) {
+        _pageControl = [[UIPageControl alloc] init];
+        _pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+        _pageControl.pageIndicatorTintColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+        _pageControl.userInteractionEnabled = NO;
+    }
+    return _pageControl;
 }
 
 @end

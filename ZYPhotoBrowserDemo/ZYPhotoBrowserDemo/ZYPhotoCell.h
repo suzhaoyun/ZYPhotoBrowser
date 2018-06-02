@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class ZYPhotoBrowser;
 @interface ZYPhotoCell : UICollectionViewCell
 
-@property (nonatomic, strong) UIImage *placeHolderImage;
-
-@property (nonatomic, assign) NSInteger index;
-
 @property (nonatomic, strong) NSURL *imageURL;
+@property (nonatomic, strong) UIImage *placeHolderImage;
+@property (nonatomic, weak) UIImageView *sourceView;
+@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, weak) ZYPhotoBrowser *browser;
 
 @end
