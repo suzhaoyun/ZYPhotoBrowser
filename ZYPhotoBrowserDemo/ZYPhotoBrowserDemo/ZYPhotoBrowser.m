@@ -127,18 +127,23 @@ static NSString *CellID = @"ZYPhotoBrowserCellID";
 
 - (void)showWithViewController:(UIViewController *)viewController
 {
-    UIGraphicsBeginImageContextWithOptions(viewController.view.bounds.size, YES, [UIScreen mainScreen].scale);
-    [viewController.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    self.bgImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
     
     if (self.animationType == ZYAnimationTypeScale) {
+        
+        UIGraphicsBeginImageContextWithOptions(viewController.view.bounds.size, YES, [UIScreen mainScreen].scale);
+        [viewController.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+        self.bgImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
         [viewController presentViewController:self animated:NO completion:^{
             [self startShowAnimation];
         }];
     }
     else if (self.animationType == ZYAnimationTypePush){
         NSAssert(viewController.navigationController != nil, @"ZYPhotoBrowser的animationType设置为ZYAnimationTypePush时，viewController必须有navigationCotnroller才可以");
+        UIGraphicsBeginImageContextWithOptions(viewController.navigationController.view.bounds.size, YES, [UIScreen mainScreen].scale);
+        [viewController.navigationController.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+        self.bgImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
         [viewController.navigationController pushViewController:self animated:YES];
     }
 }
@@ -209,7 +214,6 @@ static NSString *CellID = @"ZYPhotoBrowserCellID";
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.pagingEnabled = YES;
-        
         if (self.cellClass) {
             NSAssert([self.cellClass isSubclassOfClass:[ZYPhotoCell class]], @"自定义cell必须继承ZYPhotoCell");
             [_collectionView registerClass:self.cellClass forCellWithReuseIdentifier:CellID];
