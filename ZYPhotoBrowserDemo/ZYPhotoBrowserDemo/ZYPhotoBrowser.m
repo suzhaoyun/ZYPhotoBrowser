@@ -103,11 +103,13 @@ static NSString *CellID = @"ZYPhotoBrowserCellID";
     [self.view addSubview:animationView];
     
     CGRect destFrame = [self adjustFrameWithImage:animationView.image];
+    self.contentView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0];
     [UIView animateWithDuration:0.3 animations:^{
         animationView.frame = destFrame;
+        self.contentView.backgroundColor = [UIColor blackColor];
     }completion:^(BOOL finished) {
-        [animationView removeFromSuperview];
         self.collectionView.hidden = NO;
+        [animationView removeFromSuperview];
     }];
 }
 
@@ -127,25 +129,25 @@ static NSString *CellID = @"ZYPhotoBrowserCellID";
 
 - (void)showWithViewController:(UIViewController *)viewController
 {
-    
     if (self.animationType == ZYAnimationTypeScale) {
-        
-        UIGraphicsBeginImageContextWithOptions(viewController.view.bounds.size, YES, [UIScreen mainScreen].scale);
-        [viewController.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-        self.bgImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        [self shotcutScreen:viewController];
         [viewController presentViewController:self animated:NO completion:^{
             [self startShowAnimation];
         }];
     }
     else if (self.animationType == ZYAnimationTypePush){
         NSAssert(viewController.navigationController != nil, @"ZYPhotoBrowser的animationType设置为ZYAnimationTypePush时，viewController必须有navigationCotnroller才可以");
-        UIGraphicsBeginImageContextWithOptions(viewController.navigationController.view.bounds.size, YES, [UIScreen mainScreen].scale);
-        [viewController.navigationController.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-        self.bgImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        [self shotcutScreen:viewController];
         [viewController.navigationController pushViewController:self animated:YES];
     }
+}
+
+- (void)shotcutScreen:(UIViewController *)vc
+{
+    UIView *view = vc.navigationController?vc.navigationController.view:vc.view; UIGraphicsBeginImageContextWithOptions(view.bounds.size, YES, [UIScreen mainScreen].scale);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    self.bgImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
 }
 
 - (void)viewWillAppear:(BOOL)animated
